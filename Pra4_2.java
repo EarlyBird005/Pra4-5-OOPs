@@ -5,7 +5,7 @@ class BankAccount {
     private int accId;
     private String name;
     private float balance;
-    Private int age;
+    private int age;
 
     void openAccount(Scanner se) {
         System.out.println("Enter detail of customer(account id, name, balance, age): ");
@@ -17,7 +17,12 @@ class BankAccount {
     }
 
     void deposit(float amount) {
-        this.balance += amount;
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("balance: " + balance);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
     }
 
     float checkBalance() {
@@ -26,27 +31,22 @@ class BankAccount {
 
     void withdraw(float amount) {
         this.balance -= amount;
-        System.out.println("after withdraw balance is: " + this.balance);
+        System.out.println("After withdraw balance is: " + this.balance);
     }
 
     void calInterest() {}
 }
 
 class SavingAccount extends BankAccount {
-    static float interestRate = 0.04f;
+    private static float interestRate = 0.04f;
 
     SavingAccount(Scanner se) {
         super.openAccount(se);
-        /*
-	if (interestRate == 0f) {
-            System.out.print("Enter Interest rate for Saving Account: ");
-            interestRate = se.nextFloat();
-        }
-	*/
     }
 
     void calInterest() {
         float interest = checkBalance() * interestRate;
+	System.out.print("After interest ");
         super.deposit(interest);
     }
 
@@ -57,13 +57,12 @@ class SavingAccount extends BankAccount {
             System.err.println("\nNot sufficient balance.");
             return;
         }
-
         super.withdraw(amount);
     }
 }
 
 class FixedDepositAccount extends BankAccount {
-    static float interestRate = 0f;
+    private static float interestRate = 0f;
     private int depositTime;
 
     FixedDepositAccount(Scanner se) {
@@ -72,24 +71,19 @@ class FixedDepositAccount extends BankAccount {
 	this.depositTime = se.nextInt();
 
 	if(this.depositTime < 1)
-		this.interestRate = 0.06;
+		this.interestRate = 0.06f;
 	else if(this.depositTime >= 1 && this.depositTime < 5)
-		this.interestRate = 0.07;
+		this.interestRate = 0.07f;
 	else if(this.depositTime >= 5)
-		this.interestRate = 0.075;
+		this.interestRate = 0.075f;
 
 	if(age >= 60)
-		this.interestRate++;
-	/*
-        if (interestRate == 0f) {
-            System.out.print("Enter Interest rate for Fixed Deposit Account: ");
-            interestRate = se.nextFloat();
-        }
-	*/
+		this.interestRate += 0.01f;
     }
 
     void calInterest() {
         float interest = checkBalance() * interestRate;
+	System.out.print("After interest ");
         super.deposit(interest);
     }
 
@@ -100,7 +94,6 @@ class FixedDepositAccount extends BankAccount {
         }
         super.withdraw(amount);
     }
-
 }
 
 public class Pra4_2 {
