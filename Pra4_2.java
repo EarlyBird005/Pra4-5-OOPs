@@ -1,4 +1,6 @@
 /*Define the class BankAccount to represent an account we open with bank. Define the subclasses SavingAccount and FixedDepositAccount. Implement the operations like openAccount(), deposit(), checkBalance(), withdraw() and calInterest() for these classes. */
+
+// Raw 4_2
 import java.util.*;
 
 class BankAccount {
