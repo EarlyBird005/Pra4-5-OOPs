@@ -1,3 +1,4 @@
+/*Define the class BankAccount to represent an account we open with bank. Define the subclasses SavingAccount and FixedDepositAccount. Implement the operations like openAccount(), deposit(), checkBalance(), withdraw() and calInterest() for these classes. */
 import java.util.*;
 
 class BankAccount {
@@ -7,7 +8,7 @@ class BankAccount {
     private int age;
 
     void openAccount(Scanner se) {
-        System.out.println("Enter details of the customer (account id, name, balance, age): ");
+        System.out.println("Enter details of the customer(account id, name, balance, age): ");
         this.accId = se.nextInt();
         se.nextLine();
         this.name = se.nextLine();
@@ -18,7 +19,7 @@ class BankAccount {
     void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
-            System.out.printf("Balance: %.2f\n", balance);
+            System.out.printf("balance: %f\n", balance);
         } else {
             System.out.println("Invalid deposit amount.");
         }
@@ -30,7 +31,7 @@ class BankAccount {
 
     void withdraw(double amount) {
         this.balance -= amount;
-        System.out.printf("After withdrawal balance is: %.2f\n", balance);
+        System.out.printf("After withdrawal balance is: %f\n", balance);
     }
 
     void calInterest() {}
@@ -66,12 +67,12 @@ class SavingAccount extends BankAccount {
 
 class FixedDepositAccount extends BankAccount {
     private static double interestRate = 0;
-    private int depositTime;
+    private double depositTime;
 
     FixedDepositAccount(Scanner se) {
         super.openAccount(se);
         System.out.print("How many years do you want to deposit money: ");
-        this.depositTime = se.nextInt();
+        this.depositTime = se.nextDouble();
 
         if (this.depositTime < 1)
             this.interestRate = 0.06;
@@ -91,7 +92,7 @@ class FixedDepositAccount extends BankAccount {
     }
 
     void withdraw(double amount) {
-        if (this.balance < amount) {
+        if (checkBalance() < amount) {
             System.err.println("\nNot sufficient balance.");
             return;
         }
