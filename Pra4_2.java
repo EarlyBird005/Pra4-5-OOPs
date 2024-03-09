@@ -19,7 +19,7 @@ class BankAccount {
     void deposit(float amount) {
         if (amount > 0) {
             balance += amount;
-            System.out.println("balance: " + balance);
+            System.out.printf("balance: %f\n", balance);
         } else {
             System.out.println("Invalid deposit amount.");
         }
@@ -31,10 +31,14 @@ class BankAccount {
 
     void withdraw(float amount) {
         this.balance -= amount;
-        System.out.println("After withdraw balance is: " + this.balance);
+        System.out.println("After withdraw balance is: %f\n", balance);
     }
 
     void calInterest() {}
+	
+    int getAge() {
+	return this.age;
+    }
 }
 
 class SavingAccount extends BankAccount {
@@ -77,7 +81,7 @@ class FixedDepositAccount extends BankAccount {
 	else if(this.depositTime >= 5)
 		this.interestRate = 0.075f;
 
-	if(age >= 60)
+	if(getAge() >= 60)
 		this.interestRate += 0.01f;
     }
 
